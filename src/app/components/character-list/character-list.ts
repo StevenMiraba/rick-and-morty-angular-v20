@@ -30,6 +30,9 @@ export class CharacterListComponent implements OnInit {
   // Señal computada que indica si hay personajes
   public hasCharacters = computed(() => this.characters().length > 0);
 
+  trackById(index: number, character: Character): number {
+  return character.id;
+}
   ngOnInit(): void {
     this.loadInitialCharacters();
   }
