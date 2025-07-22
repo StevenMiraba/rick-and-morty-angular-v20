@@ -7,17 +7,35 @@ import { ApiResponse, Character } from '../models/character';
   providedIn: 'root'
 })
 export class Api {
-  private readonly API_URL = ''; 
+  private readonly API_URL = 'https://rickandmortyapi.com/api/character'; 
 
-  private charactersSignal: any; // Define esto como una señal<Character[]>
+  private charactersSignal = signal<Character[]>([]); // Define esto como una señal<Character[]>
 
-  public readonly characters: any; // Define esto como una señal de solo lectura
+  private readonly http = inject(HttpClient); // Define esto como una señal de solo lectura
+
+  public readonly characters = this.charactersSignal.asReadonly();
 
   getCharacters(): Observable<ApiResponse> {
-    throw new Error('Método no implementado');
+    return this.http.get<ApiResponse>(this.API_URL).pipe(
+      tap(response => {
+        this.charactersSignal.set(response.results);
+      })
+    );
   }
 
   searchCharacters(name: string): Observable<ApiResponse> {
-    throw new Error('Método no implementado');
+    const trimmedName = name.trim();
+
+    if (trimmedName === '') {
+      // Si nombre vacío, devuelve todos
+      return this.getCharacters();
+    } else {
+      const searchUrl = `${this.API_URL}?name=${encodeURIComponent(trimmedName)}`;
+      return this.http.get<ApiResponse>(searchUrl).pipe(
+        tap(response => {
+          this.charactersSignal.set(response.results);
+        })
+      );
+    }
   }
 }
