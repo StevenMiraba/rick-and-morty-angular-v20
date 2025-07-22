@@ -1,1 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
+/* Estilo para el encabezado */
+.main-header {
+  background: linear-gradient(to right, #00c6ff, #0072ff); // Degradado azul
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+  border-bottom: 4px solid #004ba0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+  h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  }
+
+  p {
+    margin: 0.5rem 0 0;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #e0e0e0;
+  }
+}
+
+/* Estilo para el contenedor principal */
+.main-content {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Opcional: fondo general de la app */
+body {
+  background-color: #f3f4f6;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+}
